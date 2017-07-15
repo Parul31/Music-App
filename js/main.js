@@ -4,6 +4,7 @@ var songs = [
         file: 'song1.mp3',
         album: 'Badrinath ki Dulhania',
         length: '2:56',
+        artist: 'Neha Kakkar',
         image: 'tamma.jpg'
     },
     {
@@ -11,6 +12,7 @@ var songs = [
         file: 'song2.mp3',
         album: 'Ok Jaanu',
         length: '3:15',
+        artist: 'Badshah',
         image: 'ok-Jaanu.jpg'
     },
     {
@@ -18,6 +20,7 @@ var songs = [
         file: 'song3.mp3',
         album: 'Befikre',
         length: '2:34',
+        artist: 'Arijit Singh',
         image: 'befikre.jpg'
     },
     {
@@ -25,6 +28,7 @@ var songs = [
         file: 'song4.mp3',
         album: 'Ae Dil Hai Mushkil',
         length: '2:29',
+        artist: 'Nakash Ajiz',
         image: 'breakup.jpg'
     }
 ];
@@ -79,12 +83,16 @@ window.onload = function() {
         songName.find('.song-name').text(song.name);
         songName.find('.song-album').text(song.album);
         songName.find('.song-length').text(song.length);
+        songName.find('.song-artist').text(song.artist);
         addSongNameClickEvent(song,index+1);
     });
     updateCurrentTime();
     setInterval(function() {
         updateCurrentTime();
-    }, 1000);     
+    }, 1000);    
+    $('#songs').DataTable({
+        paging: false
+    }); 
 }
 function addSongNameClickEvent(songObj, pos) {
     var id = '#song' + pos;
@@ -124,7 +132,7 @@ function changeCurrentNameDetails(songObj) {
         toggleSong();
     });
     $('body').on('keypress', function(event) {
-                if (event.keyCode == 32) {
+                if (event.keyCode == 32 && event.target.tagName != 'INPUT') {
                     toggleSong();
                 }
             });
